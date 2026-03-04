@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape from the Homeostasis Malfunction - Full Simulation</title>
+    <title>Escape from the Homeostasis Malfunction - Ultimate Edition</title>
     <style>
         body {
             background-color: #0d0d0d;
@@ -17,12 +17,13 @@
             margin: 0;
         }
         .container {
-            max-width: 800px;
+            max-width: 850px;
             background: #1a1a1a;
             border: 2px solid #00ff41;
             box-shadow: 0 0 15px #00ff41;
             padding: 30px;
             border-radius: 8px;
+            margin: 20px 0;
         }
         h1, h2 {
             color: #ff003c;
@@ -96,21 +97,21 @@
     <div id="intro" class="room active">
         <h1>🚨 MISSION BRIEFING 🚨<br>Escape from the Homeostasis Malfunction</h1>
         <p><strong>The Scenario:</strong> You and your team of DP1 Sports Scientists have been locked inside the high-tech SEHS Physiology Lab by a rogue AI system.</p>
-        <p>The AI has completely destabilized the "Virtual Athlete" in the lab, causing its physiological systems to crash. To unlock the lab doors and escape, you must restore the Virtual Athlete’s homeostasis by solving EIGHT system-based puzzles.</p>
+        <p>The AI has completely destabilized the "Virtual Athlete" in the lab, causing its physiological systems to crash. To unlock the lab doors and escape, you must restore the Virtual Athlete’s homeostasis by solving <strong>TWELVE</strong> system-based puzzles.</p>
         <button onclick="nextRoom('intro', 'room1')">ACCESS TERMINAL</button>
     </div>
 
     <!-- ROOM 1 -->
     <div id="room1" class="room">
-        <h2>Room 1: The Control Center (Nervous System)</h2>
-        <p><em>The Virtual Athlete has lost all sensation and autonomic control! The AI presents you with a corrupted circuit board. You must identify the correct sensory receptors.</em></p>
+        <h2>Room 1: The Control Center (Sensory Receptors)</h2>
+        <p><em>The Virtual Athlete has lost all sensation! The AI presents you with a corrupted circuit board. Identify the correct sensory receptors to restore input.</em></p>
         <div class="puzzle-box">
             <p>Match the system alerts to the correct receptor/nerve type to generate the 4-digit override code:</p>
             <ol>
                 <li>"Alert: Chemical imbalance! Blood pH is dropping due to an increase in CO2"</li>
                 <li>"Alert: Blood pressure dropping in the aorta!"</li>
                 <li>"Alert: The athlete is falling! We don't know where our limbs are!"</li>
-                <li>"Action required: We need to send these signals *towards* the Central Nervous System (CNS)."</li>
+                <li>"Action required: We need to send these signals *towards* the Central Nervous System."</li>
             </ol>
             <p><strong>Code Options:</strong><br> 1.Efferent | 2.Chemoreceptors | 3.Baroreceptors | 4.Proprioceptors | 5.Afferent</p>
         </div>
@@ -121,8 +122,21 @@
 
     <!-- ROOM 2 -->
     <div id="room2" class="room">
-        <h2>Room 2: The Transport Hub (Cardiovascular System)</h2>
-        <p><em>Sensory input is restored, but the Virtual Athlete's blood flow is a mess. The AI demands you calculate the exact blood volume needed to power the athlete's sprint.</em></p>
+        <h2>Room 2: The Heart Override (Autonomic Nervous System)</h2>
+        <p><em>The AI is causing severe Tachycardia (dangerously fast heart rate)! You need to activate the 'Rest and Digest' system to slow it down.</em></p>
+        <div class="puzzle-box">
+            <p>The Parasympathetic Nervous System needs to send a signal to the heart's pacemaker (SA node) to decrease the rhythm and force of contractions.</p>
+            <p>What is the specific <strong>name of the nerve</strong> that carries this parasympathetic signal to the heart?</p>
+        </div>
+        <input type="text" id="ans2" placeholder="Enter nerve name">
+        <button onclick="checkAnswer(2, 'VAGUS')">SUBMIT CODE</button>
+        <div id="err2" class="error">ERROR: Heart rate still rising. Incorrect nerve.</div>
+    </div>
+
+    <!-- ROOM 3 -->
+    <div id="room3" class="room">
+        <h2>Room 3: The Transport Hub (Cardiac Output)</h2>
+        <p><em>Heart rate is stabilized, but blood flow volume is a mess. The AI demands you calculate the exact blood volume needed to power the athlete's sprint.</em></p>
         <div class="puzzle-box">
             <p>Calculate the exact Cardiac Output (Q) in milliliters per minute using Fick's variables:</p>
             <ul>
@@ -130,74 +144,117 @@
                 <li><strong>Variable B:</strong> The heart is pumping exactly <strong>70 milliliters (SV)</strong> per beat.</li>
             </ul>
         </div>
-        <input type="text" id="ans2" placeholder="Enter Cardiac Output (numbers only)">
-        <button onclick="checkAnswer(2, '10500')">SUBMIT CODE</button>
-        <div id="err2" class="error">ERROR: Incorrect volume. Athlete's systems failing.</div>
-    </div>
-
-    <!-- ROOM 3 -->
-    <div id="room3" class="room">
-        <h2>Room 3: The Gas Exchange (Respiratory System)</h2>
-        <p><em>Blood is flowing, but the cells are suffocating! You must optimize the oxygen delivery system.</em></p>
-        <div class="puzzle-box">
-            <p>Combine the numbers from these two questions to form the 3-digit code:</p>
-            <ol>
-                <li>How many molecules of Oxygen (O2) can a single hemoglobin molecule hold? (1 digit)</li>
-                <li>What percentage of human blood is composed of Plasma? (2 digits)</li>
-            </ol>
-        </div>
-        <input type="text" id="ans3" placeholder="Enter 3-digit code (e.g. 123)">
-        <button onclick="checkAnswer(3, '455')">SUBMIT CODE</button>
-        <div id="err3" class="error">ERROR: O2 levels critically low. Try again.</div>
+        <input type="text" id="ans3" placeholder="Enter Cardiac Output (numbers only)">
+        <button onclick="checkAnswer(3, '10500')">SUBMIT CODE</button>
+        <div id="err3" class="error">ERROR: Incorrect volume. Athlete's systems failing.</div>
     </div>
 
     <!-- ROOM 4 -->
     <div id="room4" class="room">
-        <h2>Room 4: The Chemical Messengers (Endocrine System)</h2>
-        <p><em>The athlete's energy and water levels are dangerously fluctuating!</em></p>
+        <h2>Room 4: Pressure Protocols (Blood Pressure)</h2>
+        <p><em>The Virtual Athlete is now attempting to lift a heavy weight. Blood pressure is spiking dangerously!</em></p>
         <div class="puzzle-box">
-            <p>Match the emergency physiological crisis to the exact hormone needed. Use the <strong>first letter</strong> of each correct hormone to spell the password.</p>
-            <ol>
-                <li>The blood sugar is far too high! We need the hormone that opens cell channels to store glucose as glycogen.</li>
-                <li>The athlete is rapidly losing water through sweat. The hypothalamus needs to send a hormone to the kidneys to reabsorb water and produce less urine.</li>
-                <li>The athlete needs an explosive "turbo boost" for a "fight or flight" response! We need this hormone from the adrenal medulla.</li>
-            </ol>
+            <p>Unlike running, this specific type of exercise causes <strong>BOTH Systolic and Diastolic pressure to rise</strong> because the sustained muscle contractions keep blood vessels partially constricted, creating prolonged resistance.</p>
+            <p>What is this type of exercise called? (Enter the 6-letter word)</p>
         </div>
-        <input type="text" id="ans4" placeholder="Enter 3-letter code (e.g. ABC)">
-        <button onclick="checkAnswer(4, 'IAE')">SUBMIT CODE</button>
-        <div id="err4" class="error">ERROR: Incorrect hormone sequence.</div>
+        <input type="text" id="ans4" placeholder="Enter exercise type">
+        <button onclick="checkAnswer(4, 'STATIC')">SUBMIT CODE</button>
+        <div id="err4" class="error">ERROR: Vessel rupture imminent. Wrong exercise type.</div>
     </div>
 
     <!-- ROOM 5 -->
     <div id="room5" class="room">
-        <h2>Room 5: The Filtration Unit (Water Balance)</h2>
-        <p><em>The Virtual Athlete is severely dehydrated. The osmoregulation system is failing!</em></p>
+        <h2>Room 5: The Purge (Breathing Mechanics)</h2>
+        <p><em>Toxic metabolic gas detected in the lungs! You need the Virtual Athlete to perform a FORCED EXHALATION to rapidly clear it out.</em></p>
         <div class="puzzle-box">
-            <p>The previous room mentioned a hormone that stops water loss. Now, identify the exact organ that this hormone acts upon to reabsorb water and regulate osmotic pressure.</p>
-            <p>Spell the name of this organ (plural form) to unlock the door.</p>
+            <p>Which combination of muscles MUST contract to force the rib cage to close and compress the lungs forcefully?</p>
+            <ul>
+                <li><strong>A)</strong> Diaphragm & External Intercostals</li>
+                <li><strong>B)</strong> Sternocleidomastoid & Scalene</li>
+                <li><strong>C)</strong> Internal Intercostals & Abdominal muscles</li>
+                <li><strong>D)</strong> Diaphragm & Pectoralis Major</li>
+            </ul>
         </div>
-        <input type="text" id="ans5" placeholder="Enter organ name">
-        <button onclick="checkAnswer(5, 'KIDNEYS')">SUBMIT CODE</button>
-        <div id="err5" class="error">ERROR: Osmotic pressure still falling. Organ incorrect.</div>
+        <input type="text" id="ans5" placeholder="Enter the correct letter (A, B, C, or D)">
+        <button onclick="checkAnswer(5, 'C')">SUBMIT CODE</button>
+        <div id="err5" class="error">ERROR: Gas remains in lungs. Incorrect muscle activation.</div>
     </div>
 
     <!-- ROOM 6 -->
     <div id="room6" class="room">
-        <h2>Room 6: The Fuel Depot (Nutrition & RED-S)</h2>
-        <p><em>The AI warns of a systems crash due to Low Energy Availability (LEA).</em></p>
+        <h2>Room 6: Lung Capacity Calibration (Respiratory Volumes)</h2>
+        <p><em>The AI scrambled the athlete's spirometry data. You must correctly identify the lung volumes to recalibrate the sensors.</em></p>
         <div class="puzzle-box">
-            <p>The Virtual Athlete (a biological female) is risking a condition known as Relative Energy Deficiency in Sport (RED-S), which compromises bone health and performance.</p>
-            <p>Enter the exact <strong>optimal Energy Availability (EA)</strong> number (in kcal/kg FFM/day) required to maintain healthy physiological functions.</p>
+            <p>Match the definitions to their correct abbreviations (TV, RV, VC). Enter them in order (e.g. VC-RV-TV).</p>
+            <ol>
+                <li>Volume of air breathed in and out in any one normal breath.</li>
+                <li>Volume of air still contained in the lungs after a maximal exhalation.</li>
+                <li>Maximum volume of air that can be exhaled after a maximal inhalation.</li>
+            </ol>
         </div>
-        <input type="text" id="ans6" placeholder="Enter number">
-        <button onclick="checkAnswer(6, '45')">SUBMIT CODE</button>
-        <div id="err6" class="error">ERROR: Energy Availability too low. Input correct target.</div>
+        <input type="text" id="ans6" placeholder="Enter code (e.g. VC-RV-TV)">
+        <button onclick="checkAnswer(6, 'TVRVVC', 'TV-RV-VC')">SUBMIT CODE</button>
+        <div id="err6" class="error">ERROR: Calibration failed. Volumes mismatched.</div>
     </div>
 
     <!-- ROOM 7 -->
     <div id="room7" class="room">
-        <h2>Room 7: The Power Plant (Energy Systems)</h2>
-        <p><em>The cells are running out of ATP! You must sequence the energy systems based on their ATP production yield.</em></p>
+        <h2>Room 7: The Delivery Vehicle (Gas Exchange)</h2>
+        <p><em>Oxygen has diffused into the blood, but it needs a vehicle to travel to the muscles!</em></p>
+        <div class="puzzle-box">
+            <p>What is the specific <strong>protein molecule</strong> inside the erythrocytes (red blood cells) that binds to exactly four O2 molecules for transport?</p>
+        </div>
+        <input type="text" id="ans7" placeholder="Enter protein name">
+        <button onclick="checkAnswer(7, 'HEMOGLOBIN', 'HAEMOGLOBIN')">SUBMIT CODE</button>
+        <div id="err7" class="error">ERROR: Oxygen cannot bind. Try again.</div>
+    </div>
+
+    <!-- ROOM 8 -->
+    <div id="room8" class="room">
+        <h2>Room 8: The Chemical Messengers (Endocrine System)</h2>
+        <p><em>The athlete's chemical levels are dangerously fluctuating!</em></p>
+        <div class="puzzle-box">
+            <p>Match the emergency physiological crisis to the exact hormone needed. Use the <strong>first letter</strong> of each correct hormone to spell the password.</p>
+            <ol>
+                <li>Blood sugar is far too high! We need the hormone that opens cell channels to store glucose.</li>
+                <li>Athlete is rapidly losing water. The hypothalamus needs to send a hormone to the kidneys to reabsorb water.</li>
+                <li>Athlete needs an explosive "turbo boost" (fight or flight)! We need this hormone from the adrenal medulla.</li>
+            </ol>
+        </div>
+        <input type="text" id="ans8" placeholder="Enter 3-letter code (e.g. ABC)">
+        <button onclick="checkAnswer(8, 'IAE')">SUBMIT CODE</button>
+        <div id="err8" class="error">ERROR: Incorrect hormone sequence.</div>
+    </div>
+
+    <!-- ROOM 9 -->
+    <div id="room9" class="room">
+        <h2>Room 9: The Filtration Unit (Water Balance)</h2>
+        <p><em>The Virtual Athlete is severely dehydrated. The osmoregulation system is failing!</em></p>
+        <div class="puzzle-box">
+            <p>The previous room mentioned a hormone (ADH) that stops water loss. Identify the exact <strong>organ</strong> that this hormone acts upon to reabsorb water and regulate osmotic pressure.</p>
+            <p>Spell the name of this organ (plural form).</p>
+        </div>
+        <input type="text" id="ans9" placeholder="Enter organ name">
+        <button onclick="checkAnswer(9, 'KIDNEYS')">SUBMIT CODE</button>
+        <div id="err9" class="error">ERROR: Osmotic pressure still falling. Organ incorrect.</div>
+    </div>
+
+    <!-- ROOM 10 -->
+    <div id="room10" class="room">
+        <h2>Room 10: The Fuel Depot (Nutrition & Storage)</h2>
+        <p><em>The AI warns of an impending energy crash. The athlete is running out of readily available blood glucose!</em></p>
+        <div class="puzzle-box">
+            <p>To sustain performance, the athlete must break down stored carbohydrates. What is the specific name of the <strong>storage form of glucose</strong> found in skeletal muscle cells and the liver?</p>
+        </div>
+        <input type="text" id="ans10" placeholder="Enter storage molecule name">
+        <button onclick="checkAnswer(10, 'GLYCOGEN')">SUBMIT CODE</button>
+        <div id="err10" class="error">ERROR: Fuel levels critical. Incorrect molecule.</div>
+    </div>
+
+    <!-- ROOM 11 -->
+    <div id="room11" class="room">
+        <h2>Room 11: The Power Plant (Energy Systems)</h2>
+        <p><em>The cells are running out of ATP! You must sequence the energy systems based on their ATP production yield to reboot the mitochondria.</em></p>
         <div class="puzzle-box">
             <p>Type the net ATP yield (per molecule of fuel) of the three systems in order from <strong>shortest duration system to longest duration system</strong>. Format: X-X-XX.</p>
             <ul>
@@ -206,17 +263,17 @@
                 <li>System C: Aerobic (Oxidative) system</li>
             </ul>
         </div>
-        <input type="text" id="ans7" placeholder="e.g. 1-2-10">
-        <button onclick="checkAnswer(7, '1-2-38', '1-2-36')">SUBMIT CODE</button>
-        <div id="err7" class="error">ERROR: Mitochondria reboot failed.</div>
+        <input type="text" id="ans11" placeholder="e.g. 1-2-10">
+        <button onclick="checkAnswer(11, '1238', '1236')">SUBMIT CODE</button>
+        <div id="err11" class="error">ERROR: Mitochondria reboot failed.</div>
     </div>
 
-    <!-- ROOM 8 -->
-    <div id="room8" class="room">
-        <h2>Room 8: The Final Balance (Thermoregulation)</h2>
+    <!-- ROOM 12 -->
+    <div id="room12" class="room">
+        <h2>Room 12: The Final Balance (Thermoregulation)</h2>
         <p><em>The lab is freezing! The AC has dropped to 0°C. The Virtual Athlete's core body temperature is dropping toward 34°C (Hypothermia).</em></p>
         <div class="puzzle-box">
-            <p>Which TWO effectors must the Hypothalamus activate to survive the cold? (Enter the two letters, e.g. AC)</p>
+            <p>Which TWO effectors must the Hypothalamus activate to survive the cold? (Enter the two letters, e.g. XY)</p>
             <ul>
                 <li><strong>A.</strong> Stimulate sweat glands to evaporate water.</li>
                 <li><strong>B.</strong> Cause Vasoconstriction of arterioles to decrease blood flow to the skin.</li>
@@ -224,15 +281,15 @@
                 <li><strong>D.</strong> Initiate shivering to produce thermogenesis in skeletal muscles.</li>
             </ul>
         </div>
-        <input type="text" id="ans8" placeholder="Enter two letters (e.g. XY)">
-        <button onclick="checkAnswer(8, 'BD', 'DB')">SUBMIT CODE</button>
-        <div id="err8" class="error">ERROR: Homeostasis not achieved. Athlete freezing.</div>
+        <input type="text" id="ans12" placeholder="Enter two letters (e.g. XY)">
+        <button onclick="checkAnswer(12, 'BD', 'DB')">SUBMIT CODE</button>
+        <div id="err12" class="error">ERROR: Homeostasis not achieved. Athlete freezing.</div>
     </div>
 
     <!-- SUCCESS -->
     <div id="success" class="room">
         <h2>🔓 ESCAPE SUCCESSFUL! 🔓</h2>
-        <p>The Virtual Athlete's core temperature stabilizes at 37°C. The heart rate returns to a resting 60 bpm, energy stores are optimized, and the lab doors slide open.</p>
+        <p>The Virtual Athlete's core temperature stabilizes at 37°C. The heart rate returns to a resting 60 bpm, energy stores are optimized, and breathing is steady.</p>
         <p><strong>Congratulations, Sports Scientists! You have survived the Physiology Lab Lockdown!</strong></p>
     </div>
 </div>
@@ -254,10 +311,10 @@
 
         if (userAnswer === valid1 || (valid2 && userAnswer === valid2)) {
             errorMsg.style.display = 'none';
-            if (roomNumber < 8) {
+            if (roomNumber < 12) {
                 nextRoom('room' + roomNumber, 'room' + (roomNumber + 1));
             } else {
-                nextRoom('room8', 'success');
+                nextRoom('room12', 'success');
             }
         } else {
             errorMsg.style.display = 'block';
