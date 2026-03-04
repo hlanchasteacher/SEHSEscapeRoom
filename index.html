@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape from the Homeostasis Malfunction</title>
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #00ff41;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            background: #1a1a1a;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 15px #00ff41;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        h1, h2 {
+            color: #ff003c;
+            text-align: center;
+            text-shadow: 0 0 5px #ff003c;
+        }
+        p, li {
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        .room {
+            display: none;
+            animation: fadeIn 1s;
+        }
+        .room.active {
+            display: block;
+        }
+        .puzzle-box {
+            background: #0d0d0d;
+            border: 1px dashed #00ff41;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        input[type="text"] {
+            width: 100%;
+            background: #000;
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 10px;
+            font-size: 18px;
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            text-transform: uppercase;
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 8px #00ff41;
+        }
+        button {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        button:hover {
+            background: #00cc33;
+        }
+        .error {
+            color: #ff003c;
+            font-weight: bold;
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- INTRO -->
+    <div id="intro" class="room active">
+        <h1>🚨 MISSION BRIEFING 🚨<br>Escape from the Homeostasis Malfunction</h1>
+        <p><strong>The Scenario:</strong> You and your team of DP1 Sports Scientists have been locked inside the high-tech SEHS Physiology Lab by a rogue AI system.</p>
+        <p>The AI has completely destabilized the "Virtual Athlete" in the lab, causing its physiological systems to crash. To unlock the lab doors and escape, you must restore the Virtual Athlete’s homeostasis by solving five system-based puzzles.</p>
+        <button onclick="nextRoom('intro', 'room1')">ACCESS TERMINAL</button>
+    </div>
+
+    <!-- ROOM 1 -->
+    <div id="room1" class="room">
+        <h2>Room 1: The Control Center (Nervous System)</h2>
+        <p><em>The Virtual Athlete has lost all sensation and autonomic control! The AI presents you with a corrupted circuit board. You must identify the correct sensory receptors to restore the connection.</em></p>
+        <div class="puzzle-box">
+            <p>Match the system alerts to the correct receptor/nerve type to generate the 4-digit override code:</p>
+            <ol>
+                <li>"Alert: Chemical imbalance! Blood pH is dropping due to an increase in CO2"</li>
+                <li>"Alert: Blood pressure dropping in the aorta!"</li>
+                <li>"Alert: The athlete is falling! We don't know where our limbs are!"</li>
+                <li>"Action required: We need to send these signals *towards* the Central Nervous System (CNS)."</li>
+            </ol>
+            <p><strong>Code Options:</strong><br>
+            [1] Efferent | [2] Chemoreceptors | [3] Baroreceptors | [4] Proprioceptors | [5] Afferent</p>
+        </div>
+        <input type="text" id="ans1" placeholder="Enter 4-digit code (e.g. 1234)">
+        <button onclick="checkAnswer(1, '2345')">SUBMIT CODE</button>
+        <div id="err1" class="error">ERROR: Invalid Code. The AI laughs at you.</div>
+    </div>
+
+    <!-- ROOM 2 -->
+    <div id="room2" class="room">
+        <h2>Room 2: The Transport Hub (Cardiovascular System)</h2>
+        <p><em>Sensory input is restored, but the Virtual Athlete's blood flow is a mess. The AI demands you calculate the exact blood volume needed to power the athlete's sprint.</em></p>
+        <div class="puzzle-box">
+            <p>The athlete is running on the treadmill. To stabilize the system, calculate the exact Cardiac Output (Q) in milliliters per minute using Fick's variables:</p>
+            <ul>
+                <li><strong>Variable A:</strong> The athlete's heart is beating at <strong>150 beats per minute (HR)</strong>.</li>
+                <li><strong>Variable B:</strong> The heart is pumping exactly <strong>70 milliliters (SV)</strong> per beat.</li>
+            </ul>
+        </div>
+        <input type="text" id="ans2" placeholder="Enter Cardiac Output (numbers only)">
+        <button onclick="checkAnswer(2, '10500')">SUBMIT CODE</button>
+        <div id="err2" class="error">ERROR: Incorrect volume. Athlete's systems failing.</div>
+    </div>
+
+    <!-- ROOM 3 -->
+    <div id="room3" class="room">
+        <h2>Room 3: The Chemical Messengers (Endocrine System)</h2>
+        <p><em>The heart is pumping, but the Virtual Athlete's energy and water levels are dangerously fluctuating!</em></p>
+        <div class="puzzle-box">
+            <p>Match the emergency physiological crisis to the exact hormone needed to fix it. Use the <strong>first letter</strong> of each correct hormone to spell the password.</p>
+            <ol>
+                <li>The blood sugar is far too high! We need the hormone that opens cell channels to store glucose as glycogen.</li>
+                <li>The athlete is rapidly losing water through sweat. The hypothalamus needs to send a hormone to the kidneys to reabsorb water and produce less urine.</li>
+                <li>The athlete needs an explosive "turbo boost" for a "fight or flight" response! We need this hormone from the adrenal medulla.</li>
+            </ol>
+        </div>
+        <input type="text" id="ans3" placeholder="Enter 3-letter code (e.g. ABC)">
+        <button onclick="checkAnswer(3, 'IAE')">SUBMIT CODE</button>
+        <div id="err3" class="error">ERROR: Incorrect hormone sequence.</div>
+    </div>
+
+    <!-- ROOM 4 -->
+    <div id="room4" class="room">
+        <h2>Room 4: The Power Plant (Energy Systems)</h2>
+        <p><em>The Virtual Athlete is trying to sprint, but the cells are running out of ATP! You must sequence the energy systems based on their ATP production yield.</em></p>
+        <div class="puzzle-box">
+            <p>Type the net ATP yield (per molecule of fuel) of the three systems in order from <strong>shortest duration system to longest duration system</strong>. Format: X-X-XX.</p>
+            <ul>
+                <li>System A: Phosphagen (CrP) system</li>
+                <li>System B: Glycolytic (Lactic Acid) system</li>
+                <li>System C: Aerobic (Oxidative) system</li>
+            </ul>
+        </div>
+        <input type="text" id="ans4" placeholder="e.g. 1-2-10">
+        <button onclick="checkAnswer(4, '1-2-38', '1-2-36')">SUBMIT CODE</button>
+        <div id="err4" class="error">ERROR: Mitochondria reboot failed.</div>
+    </div>
+
+    <!-- ROOM 5 -->
+    <div id="room5" class="room">
+        <h2>Room 5: The Final Balance (Thermoregulation)</h2>
+        <p><em>The lab is freezing! The AC has dropped to 0°C. The Virtual Athlete's core body temperature is dropping toward 34°C (Hypothermia).</em></p>
+        <div class="puzzle-box">
+            <p>Which TWO effectors must you activate to survive the cold? (Enter the two letters, e.g. AC)</p>
+            <ul>
+                <li><strong>A.</strong> Stimulate sweat glands to evaporate water.</li>
+                <li><strong>B.</strong> Cause Vasoconstriction of arterioles to decrease blood flow to the skin.</li>
+                <li><strong>C.</strong> Cause Vasodilation of arterioles to increase blood flow to the skin.</li>
+                <li><strong>D.</strong> Initiate shivering to produce thermogenesis in skeletal muscles.</li>
+            </ul>
+        </div>
+        <input type="text" id="ans5" placeholder="Enter two letters (e.g. XY)">
+        <button onclick="checkAnswer(5, 'BD', 'DB')">SUBMIT CODE</button>
+        <div id="err5" class="error">ERROR: Homeostasis not achieved. Athlete freezing.</div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div id="success" class="room">
+        <h2>🔓 ESCAPE SUCCESSFUL! 🔓</h2>
+        <p>The Virtual Athlete's core temperature stabilizes at 37°C. The heart rate returns to a resting 60 bpm, and the lab doors slide open.</p>
+        <p><strong>Congratulations, Sports Scientists! You have survived the Physiology Lab Lockdown!</strong></p>
+    </div>
+</div>
+
+<script>
+    function nextRoom(currentRoom, nextRoom) {
+        document.getElementById(currentRoom).classList.remove('active');
+        document.getElementById(nextRoom).classList.add('active');
+    }
+
+    function checkAnswer(roomNumber, correctCode1, correctCode2 = null) {
+        // Get user input, remove spaces, dashes, ampersands, and make uppercase
+        let inputField = document.getElementById('ans' + roomNumber);
+        let errorMsg = document.getElementById('err' + roomNumber);
+        let userAnswer = inputField.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+        
+        let valid1 = correctCode1.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+        let valid2 = correctCode2 ? correctCode2.replace(/[^a-zA-Z0-9]/g, '').toUpperCase() : null;
+
+        if (userAnswer === valid1 || (valid2 && userAnswer === valid2)) {
+            errorMsg.style.display = 'none';
+            if (roomNumber < 5) {
+                nextRoom('room' + roomNumber, 'room' + (roomNumber + 1));
+            } else {
+                nextRoom('room5', 'success');
+            }
+        } else {
+            errorMsg.style.display = 'block';
+            inputField.value = ''; // clear field on error
+        }
+    }
+</script>
+
+</body>
+</html>
